@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>eBikes buchen</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,16 +21,16 @@
             <form method="post">
 
                 <div class="form-group">
-                    <label for="bikePicker">How many Bikes do you need?</label>
-                    <input type="number" name="bikes" id="bikePicker" class="form-control" placeholder="number of bikes..."
-                        aria-describedby="helpId">
-                    <small id="helpId" class="text-muted">Select the number of bikes you expect to rent for this day</small>
+                    <label for="bikePicker">Wie viele eBikes brauchen Sie?</label>
+                    <input type="number" name="bikes" id="bikePicker" class="form-control"
+                        placeholder="Anzahl an eBikes..." aria-describedby="helpId">
+                    <small id="helpId" class="text-muted">Geben Sie an wie viele eBikes Sie an diesem Tage
+                        brauchen</small>
                 </div>
                 <div class="form-group">
-                    <label for="datePicker">Please select a date</label>
+                    <label for="datePicker">Wählen Sie ein Datum</label>
                     <input type="date" name="date" id="datePicker" class="form-control" placeholder=""
                         aria-describedby="helpId">
-                    <small id="helpId" class="text-muted">Tomorrow is the default option</small>
                 </div>
                 <input type="submit" class="btn btn-warning" value="Request Bikes">
             </form>
@@ -44,7 +44,7 @@
                   $success = insertBooking($date, $bikes);
                   if($success){
                     echo '<div class="jumbotron bg-success">'; 
-                    echo "<h4 class='text-center font-weight-normal'>You requested " . $bikes . " bikes for " . $date . "</h4>";
+                    echo "<h4 class='text-center font-weight-normal'>Sie haben " . $bikes . " eBikes für den " . $date . " gebucht</h4>";
                     echo '</div>';
                   } else{
                     echo '<div class="jumbotron bg-info">'; 

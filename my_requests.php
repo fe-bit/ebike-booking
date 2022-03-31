@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>My Requests</title>
+    <title>Meine Buchungen</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,7 +14,7 @@
 
 <body>
     <?php include 'navbar.php' ?>
-
+    <h1>Meine Buchungen</h1>
     <div class="container">
         <div class="jumbotron">
             <table class="table">

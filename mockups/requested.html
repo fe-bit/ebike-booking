@@ -13,11 +13,10 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-flex bg-dark p-2">
         <nav class="nav justify-content-center">
-            <a class="nav-link active" href="#">Request Bikes</a>
-            <a class="nav-link" href="#">My Requests</a>
-            <a class="nav-link" href="#">My Calendar</a>
+            <a class="nav-link text-white pr-5" href="index.php">Request Bikes</a>
+            <a class="nav-link text-white pl-5" href="my_requests.php">My Requests</a>
         </nav>
     </div>
     <div class="container">
@@ -39,8 +38,8 @@
                 <button class="btn btn-warning" onclick="request.html">Request Bikes</button>
             </form>
         </div>
-        <div class="jumbotron">
-            <p>You requested 5 Bikes for 03.12.2022. Thank you!</p>
+        <div class="jumbotron bg-success">
+            <h4 class='text-center font-weight-normal'>Sie haben 5 eBikes für den 22.05.2022 gebucht!</h4>
         </div>
     </div>
     <!-- Optional JavaScript -->
@@ -54,15 +53,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script>
-        console.log("works")
-        //document.getElementById('datePicker').value = new Date().toDateInputValue();
-        const today = new Date()
-        const tomorrow = new Date(today)
-        tomorrow.setDate(tomorrow.getDate() + 1)
-
-        document.getElementById('datePicker').valueAsDate = tomorrow;
-    </script>
 </body>
 
 </html>
