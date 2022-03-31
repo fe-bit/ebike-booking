@@ -1,0 +1,11 @@
+<BikeBookings>
+    <BikeBooking>
+        <Date></Date>
+        <BikeAmount></BikeAmount>
+        <Hotel>
+            <Id></Id>
+            <Address></Address>
+            <Country></Country>
+        </Hotel>
+    </BikeBooking>
+</BikeBookings>
