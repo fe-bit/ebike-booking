@@ -15,13 +15,25 @@ function getEntry() {
 
 function getAllBookings(){
     $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
-    $sql = "SELECT date, bikes FROM booking";
+    $sql = "SELECT date_of_booking, bikes FROM booking";
     return $pdo->query($sql);
 }
 
+function date_is_already_in_booking($pdo, $date){
+    $sql ="SELECT date_of_booking, Count(id) FROM booking WHERE date_of_booking='" . $date . "' GROUP BY date_of_booking;";
+    $count = $pdo->query($sql);
+    return $count->rowCount()!=0;
+}
+
 function insertBooking($date, $bikes){
+
+    
     $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
-    $statement = $pdo->prepare("INSERT INTO booking (date, bikes) VALUES (?, ?)");
-    $statement->execute(array($date, $bikes));    
+    if (date_is_already_in_booking($pdo, $date)){
+        return false;
+    }
+    $statement = $pdo->prepare("INSERT INTO booking (date_of_booking, bikes) VALUES (?, ?)");
+    $statement->execute(array($date, $bikes));   
+    return true; 
 }
 ?>

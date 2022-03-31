@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Ebike Booking</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,18 +13,22 @@
 </head>
 
 <body>
-    <?php include 'navbar.php' ?>
-
-
+    <div class="container">
+        <nav class="nav justify-content-center">
+            <a class="nav-link active" href="#">Request Bikes</a>
+            <a class="nav-link" href="#">My Requests</a>
+            <a class="nav-link" href="#">My Calendar</a>
+        </nav>
+    </div>
     <div class="container">
         <div class="jumbotron">
-            <form method="post">
-
+            <form method="post" action="requested.html">
                 <div class="form-group">
                     <label for="bikePicker">How many Bikes do you need?</label>
-                    <input type="number" name="bikes" id="bikePicker" class="form-control" placeholder="number of bikes..."
-                        aria-describedby="helpId">
-                    <small id="helpId" class="text-muted">Select the number of bikes you expect to rent for this day</small>
+                    <input type="number" name="bikes" id="bikePicker" class="form-control"
+                        placeholder="number of bikes..." aria-describedby="helpId">
+                    <small id="helpId" class="text-muted">Select the number of bikes you expect to rent for this
+                        day</small>
                 </div>
                 <div class="form-group">
                     <label for="datePicker">Please select a date</label>
@@ -32,35 +36,12 @@
                         aria-describedby="helpId">
                     <small id="helpId" class="text-muted">Tomorrow is the default option</small>
                 </div>
-                <input type="submit" class="btn btn-warning" value="Request Bikes">
+                <button class="btn btn-warning" onclick="request.html">Request Bikes</button>
             </form>
         </div>
-        
-            <?php   
-                include 'database.php';             
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                  $bikes = test_input($_POST["bikes"]);
-                  $date = test_input($_POST["date"]);
-                  $success = insertBooking($date, $bikes);
-                  if($success){
-                    echo '<div class="jumbotron bg-success">'; 
-                    echo "<h4 class='text-center font-weight-normal'>You requested " . $bikes . " bikes for " . $date . "</h4>";
-                    echo '</div>';
-                  } else{
-                    echo '<div class="jumbotron bg-info">'; 
-                    echo "<h4 class='text-center font-weight-normal'>There is already a booking for this date</h4>";
-                    echo '</div>'; 
-                  }                  
-                }
-                
-                function test_input($data) {
-                  $data = trim($data);
-                  $data = stripslashes($data);
-                  $data = htmlspecialchars($data);
-                  return $data;
-                }
-            ?>
-        
+        <div class="jumbotron">
+            <p>You requested 5 Bikes for 03.12.2022. Thank you!</p>
+        </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
