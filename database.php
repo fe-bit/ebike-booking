@@ -15,7 +15,7 @@ function getEntry() {
 
 function getAllBookings(){
     $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
-    $sql = "SELECT date_of_booking, bikes FROM booking";
+    $sql = "SELECT date_of_booking, Sum(bikes) FROM booking GROUP BY date_of_booking";
     return $pdo->query($sql);
 }
 
