@@ -15,7 +15,7 @@
 <body>
     <?php include 'navbar.php' ?>
 
-
+    <?php  phpinfo() ?>
     <div class="container">
         <div class="jumbotron">
             <form method="post">
@@ -32,7 +32,7 @@
                     <input type="date" name="date" id="datePicker" class="form-control" placeholder=""
                         aria-describedby="helpId">
                 </div>
-                <input type="submit" class="btn btn-warning" value="Request Bikes">
+                <input type="submit" class="btn btn-warning" value="Buchen">
             </form>
         </div>
         
@@ -42,15 +42,24 @@
                   $bikes = test_input($_POST["bikes"]);
                   $date = test_input($_POST["date"]);
                   $success = insertBooking($date, $bikes);
-                  if($success){
-                    echo '<div class="jumbotron bg-success">'; 
-                    echo "<h4 class='text-center font-weight-normal'>Sie haben " . $bikes . " eBikes für den " . $date . " gebucht</h4>";
-                    echo '</div>';
-                  } else{
-                    echo '<div class="jumbotron bg-info">'; 
-                    echo "<h4 class='text-center font-weight-normal'>There is already a booking for this date</h4>";
-                    echo '</div>'; 
-                  }                  
+                  switch($success){
+                      case BookingStatus::Success: 
+                        echo '<div class="jumbotron bg-success">'; 
+                        echo "<h4 class='text-center font-weight-normal'>Sie haben " . $bikes . " eBikes für den " . $date . " gebucht!</h4>";
+                        echo '</div>';
+                        break;
+                    case BookingStatus::Duplicate:
+                        echo '<div class="jumbotron bg-info">'; 
+                        echo "<h4 class='text-center font-weight-normal'>Sie haben bereits eine Buchung für den " . $date . " vorgenommen.
+                        Passen Sie die Buchung unter <em>Meine Buchungen</em> an</h4>";
+                        echo '</div>'; 
+                        break;
+                    case BookingStatus::Error:
+                        echo '<div class="jumbotron bg-danger">'; 
+                        echo "<h4 class='text-center font-weight-normal'>Der Buchungsvorgang war leider nicht erfolgreich. Versuchen Sie
+                        es nochmal. Falls das Problem besteht, kontaktieren Sie den Kundenservice.</h4>";
+                        echo '</div>'; 
+                  }                                                 
                 }
                 
                 function test_input($data) {
