@@ -15,7 +15,6 @@
 <body>
     <?php include 'navbar.php' ?>
 
-    <?php  phpinfo() ?>
     <div class="container">
         <div class="jumbotron">
             <form method="post">
