@@ -18,9 +18,9 @@ function getEntry() {
     return $database;
   }
 
-function getAllBookings(){
+function getAllBookings($year, $month){
     $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
-    $sql = "SELECT date_of_booking, Sum(bikes) FROM booking GROUP BY date_of_booking";
+    $sql = "SELECT date_of_booking, bikes FROM booking WHERE YEAR(date_of_booking)='" . $year . "' AND MONTH(date_of_booking)='" . $month . "';";
     return $pdo->query($sql);
 }
 
@@ -45,4 +45,3 @@ function insertBooking($date, $bikes){
         return BookingStatus::Error;
     }    
 }
-?>

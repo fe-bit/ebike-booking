@@ -35,7 +35,7 @@
                         <option value="2">Februar</option>
                         <option value="3">M&auml;rz</option>
                         <option value="4">April</option>
-                        <option value="5" selected>Mai</option>
+                        <option value="5">Mai</option>
                         <option value="6">Juni</option>
                         <option value="7">Juli</option>
                         <option value="8">August</option>
@@ -59,19 +59,21 @@
                 <tbody>
                     <?php
                     //set year and date and give them as params to database
-                    
+
                     include 'database.php';
-                    $entry = getEntry();
-                    $entry = getAllBookings();
-                    foreach ($entry as $en) {
-                        echo '<tr>
-                            <td scope="row">' . $en[0] . '</td>
-                            <td>' . $en[1] . '</td>
-                            <td><a class="btn btn-primary" href="#">Bearbeiten</button></td>
-                            </tr>';
+
+                    if (isset($_GET['year']) && isset($_GET['month'])) {
+                        $year = htmlspecialchars($_GET["year"]);
+                        $month = htmlspecialchars($_GET["month"]);
+                        $entry = getAllBookings($year, $month);
+                        foreach ($entry as $en) {
+                            echo '<tr>
+                                <td scope="row">' . $en[0] . '</td>
+                                <td>' . $en[1] . '</td>
+                                <td><a class="btn btn-primary" href="#">Bearbeiten</button></td>
+                                </tr>';
+                        }
                     }
-
-
                     ?>
                 </tbody>
             </table>
