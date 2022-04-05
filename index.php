@@ -59,7 +59,7 @@
                         echo '</div>';
                 }
             } else {
-                echo '<div class="jumbotron bg-info">
+                echo '<div class="jumbotron bg-warning">
                         <h4 class="text-center font-weight-normal">Ung&uuml;ltige Eingabe</h4>
                         <p class="text-center font-weight-normal">Bitte geben Sie eine Ganzzahl an Fahrr&auml;dern an und wählen Sie ein zukünftiges Datum aus</p>
                         </div>';
