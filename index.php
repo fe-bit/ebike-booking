@@ -36,57 +36,43 @@
         include 'database.php';
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //bikes und date auf Gültigkeit validieren
-            $bikes = test_input($_POST["bikes"]);
-            $date = test_input($_POST["date"]);
-            if (is_valid_input($bikes, $date)) {
-                $success = insertBooking($date, $bikes);
-                switch ($success) {
-                    case BookingStatus::Success:
-                        echo '<div class="jumbotron bg-success">';
-                        echo "<h4 class='text-center font-weight-normal'>Sie haben " . $bikes . " eBikes für den " . $date . " gebucht!</h4>";
-                        echo '</div>';
-                        break;
-                    case BookingStatus::Duplicate:
-                        echo '<div class="jumbotron bg-info">';
-                        echo "<h4 class='text-center font-weight-normal'>Sie haben bereits eine Buchung für den " . $date . " vorgenommen.
-                            Passen Sie die Buchung unter <em>Meine Buchungen</em> an</h4>";
-                        echo '</div>';
-                        break;
-                    case BookingStatus::Error:
-                        echo '<div class="jumbotron bg-danger">';
-                        echo "<h4 class='text-center font-weight-normal'>Der Buchungsvorgang war leider nicht erfolgreich. Versuchen Sie
-                            es nochmal. Falls das Problem besteht, kontaktieren Sie den Kundenservice.</h4>";
-                        echo '</div>';
-                }
-            } else {
-                echo '<div class="jumbotron bg-warning">
-                        <h4 class="text-center font-weight-normal">Ung&uuml;ltige Eingabe</h4>
-                        <p class="text-center font-weight-normal">Bitte geben Sie eine Ganzzahl an Fahrr&auml;dern an und wählen Sie ein zukünftiges Datum aus</p>
-                        </div>';
+            $bikes = get_cleaned_value($_POST["bikes"]);
+            $date = get_cleaned_value($_POST["date"]);
+
+            $success = insertBooking($date, $bikes);
+            switch ($success) {
+                case BookingStatus::Success:
+                    echo '<div class="jumbotron bg-success">';
+                    echo "<h4 class='text-center font-weight-normal'>Sie haben " . $bikes . " eBikes für den " . $date . " gebucht!</h4>";
+                    echo '</div>';
+                    break;
+                case BookingStatus::Duplicate:
+                    echo '<div class="jumbotron bg-info">';
+                    echo "<h4 class='text-center font-weight-normal'>Sie haben bereits eine Buchung für den " . $date . " vorgenommen.
+                        Passen Sie die Buchung unter <em>Meine Buchungen</em> an</h4>";
+                    echo '</div>';
+                    break;
+                case BookingStatus::Error:
+                    echo '<div class="jumbotron bg-danger">';
+                    echo "<h4 class='text-center font-weight-normal'>Der Buchungsvorgang war leider nicht erfolgreich. Versuchen Sie
+                        es nochmal. Falls das Problem besteht, kontaktieren Sie den Kundenservice.</h4>";
+                    echo '</div>';
+                    break;
+                case BookingStatus::InvalidDateOrNumber:
+                    echo '<div class="jumbotron bg-warning">
+                    <h4 class="text-center font-weight-normal">Ung&uuml;ltige Eingabe</h4>
+                    <p class="text-center font-weight-normal">Bitte geben Sie eine Ganzzahl an Fahrr&auml;dern an und wählen Sie ein zukünftiges Datum aus</p>
+                    </div>';
+                    break;
             }
         }
 
-        function test_input($data)
+        function get_cleaned_value($data)
         {
             $data = trim($data);
             $data = stripslashes($data);
             $data = htmlspecialchars($data);
             return $data;
-        }
-
-        function is_valid_input($bikes, $date)
-        {
-            try {
-                (int)$bikes;
-                $today = new DateTime();
-                $date_d = new DateTime($date);
-                if ($today > $date_d) {
-                    return false;
-                }
-                return true;
-            } catch (Exception $e) {
-                return (false);
-            }
         }
         ?>
 

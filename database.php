@@ -5,6 +5,7 @@ enum BookingStatus
     case Success;
     case Duplicate;
     case Error;
+    case InvalidDateOrNumber;
 }
 
 
@@ -31,10 +32,28 @@ function date_is_already_in_booking($pdo, $date)
     return $count->rowCount() != 0;
 }
 
+function is_valid_input($bikes, $date)
+{
+    try {
+        (int)$bikes;
+        $today = new DateTime();
+        $date_d = new DateTime($date);
+        if ($today > $date_d) {
+            return false;
+        }
+        return true;
+    } catch (Exception $e) {
+        return (false);
+    }
+}
+
 function insertBooking($date, $bikes)
 {
 
     try {
+        if (!Is_valid_input($bikes, $date)) {
+            return BookingStatus::InvalidDateOrNumber;
+        }
         $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
         if (date_is_already_in_booking($pdo, $date)) {
             return BookingStatus::Duplicate;
