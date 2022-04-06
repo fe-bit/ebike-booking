@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BikeBookings>
+    <Hotel>
+        <Address></Address>
+        <Country></Country>
+        <Bookings>
+            <Booking>
+                <Date></Date>
+                <BikeAmount></BikeAmount>                
+            </Booking>
+        </Bookings>
+    </Hotel>
+</BikeBookings>
