@@ -9,15 +9,6 @@ enum BookingStatus
 }
 
 
-function getEntry()
-{
-    $database = [
-        [date("2022/10/5"), 2],
-        [date("2022/10/6"), 10],
-    ];
-    return $database;
-}
-
 function getAllBookings($year, $month)
 {
     $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
