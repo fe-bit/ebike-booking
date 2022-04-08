@@ -75,6 +75,17 @@
                                 <td><a class="btn btn-primary" href="#">Bearbeiten</button></td>
                                 </tr>';
                         }
+                    } else {
+                        $year = idate('Y');
+                        $month = idate('m');
+                        $entry = getAllBookings($year, $month);
+                        foreach ($entry as $en) {
+                            echo '<tr>
+                                <td scope="row">' . $en[0] . '</td>
+                                <td>' . $en[1] . '</td>
+                                <td><a class="btn btn-primary" href="#">Bearbeiten</button></td>
+                                </tr>';
+                        }
                     }
                     ?>
                 </tbody>
