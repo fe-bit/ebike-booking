@@ -21,8 +21,7 @@
                 <div class="form-group">
                     <label for="bikePicker">Wie viele eBikes brauchen Sie?</label>
                     <input type="number" name="bikes" id="bikePicker" class="form-control" placeholder="Anzahl an eBikes..." aria-describedby="helpId">
-                    <small id="helpId" class="text-muted">Geben Sie an wie viele eBikes Sie an diesem Tage
-                        brauchen</small>
+                    <small id="helpId" class="text-muted">Geben Sie an wie viele eBikes Sie an diesem Tag brauchen</small>
                 </div>
                 <div class="form-group">
                     <label for="datePicker">Wählen Sie ein Datum</label>
