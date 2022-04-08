@@ -28,21 +28,23 @@
                         <option>2023</option>
                     </select>
                 </div>
+                <?php echo idate('m') == 1 ?>
                 <div class="form-group">
                     <label for="selectMonth" class="mr-1">Monat</label>
                     <select id="selectMonth" class="form-control" name="month">
-                        <option value="1">Januar</option>
-                        <option value="2">Februar</option>
-                        <option value="3">M&auml;rz</option>
-                        <option value="4">April</option>
-                        <option value="5">Mai</option>
-                        <option value="6">Juni</option>
-                        <option value="7">Juli</option>
-                        <option value="8">August</option>
-                        <option value="9">September</option>
-                        <option value="10">Oktober</option>
-                        <option value="11">November</option>
-                        <option value="12">Dezember</option>
+                        <?php
+                        $months = array("Januar", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
+                        $current_month = idate('m');
+                        $counter = 1;
+                        foreach ($months as $month) {
+                            if ($counter == $current_month) {
+                                echo '<option value="' . $counter . '" selected>' . $month . '</option>';
+                            } else {
+                                echo '<option value="' . $counter . '">' . $month . '</option>';
+                            }
+                            $counter += 1;
+                        }
+                        ?>
                     </select>
                 </div>
                 <input class="btn btn-info mr-2 ml-2" type="submit" value="Suchen" />
