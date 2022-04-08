@@ -26,7 +26,10 @@ function date_is_already_in_booking($pdo, $date)
 function is_valid_input($bikes, $date)
 {
     try {
-        (int)$bikes;
+        $bikes_number = (int)$bikes;
+        if ($bikes_number <= 0) {
+            return false;
+        }
         $today = new DateTime();
         $date_d = new DateTime($date);
         if ($today > $date_d) {
@@ -40,7 +43,6 @@ function is_valid_input($bikes, $date)
 
 function insertBooking($date, $bikes)
 {
-
     try {
         if (!Is_valid_input($bikes, $date)) {
             return BookingStatus::InvalidDateOrNumber;
