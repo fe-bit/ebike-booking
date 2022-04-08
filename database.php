@@ -12,7 +12,7 @@ enum BookingStatus
 function getAllBookings($year, $month)
 {
     $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
-    $sql = "SELECT date_of_booking, bikes FROM booking WHERE YEAR(date_of_booking)='" . $year . "' AND MONTH(date_of_booking)='" . $month . "';";
+    $sql = "SELECT date_of_booking, bikes FROM booking WHERE YEAR(date_of_booking)='" . $year . "' AND MONTH(date_of_booking)='" . $month . "' ORDER BY date_of_booking ASC;";
     return $pdo->query($sql);
 }
 
