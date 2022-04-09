@@ -1,5 +1,43 @@
 <?php
 
+
+
+
+function SetUpDatabase(){
+    $dbusername = "root";
+    $dbpassword = "";
+    $dbname = "ebike_bookings";
+    $pdo = new PDO("mysql:host=localhost", $dbusername, $dbpassword);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $dbname = "`".str_replace("`","``",$dbname)."`";
+    $pdo->query("CREATE DATABASE IF NOT EXISTS $dbname");
+    $pdo->query("use $dbname");
+}
+
+function GetDbConnection(){
+    return new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'root', '');
+}
+
+function setUpTable(){
+    try{
+        $sql = "CREATE TABLE IF NOT EXISTS `booking` (
+            `id` INT AUTO_INCREMENT NOT NULL,
+            `bikes` INT NOT NULL,
+            `date_of_booking` DATE NOT NULL,
+            PRIMARY KEY (id)
+          );";
+        $pdo = GetDbConnection();
+        $pdo->query($sql);
+    } catch (Exception $e){
+        echo $e;
+    }
+}
+
+
+SetUpDatabase();
+setUpTable();
+
 enum BookingStatus
 {
     case Success;
@@ -11,7 +49,7 @@ enum BookingStatus
 
 function getAllBookings($year, $month)
 {
-    $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
+    $pdo = GetDbConnection();//new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
     $sql = "SELECT date_of_booking, bikes FROM booking WHERE YEAR(date_of_booking)='" . $year . "' AND MONTH(date_of_booking)='" . $month . "' ORDER BY date_of_booking ASC;";
     return $pdo->query($sql);
 }
@@ -47,7 +85,7 @@ function insertBooking($date, $bikes)
         if (!Is_valid_input($bikes, $date)) {
             return BookingStatus::InvalidDateOrNumber;
         }
-        $pdo = new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
+        $pdo = GetDbConnection();//new PDO('mysql:host=localhost;dbname=ebike_bookings;charset=utf8', 'bookingManager', 'addjsdfe093');
         if (date_is_already_in_booking($pdo, $date)) {
             return BookingStatus::Duplicate;
         }

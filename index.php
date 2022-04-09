@@ -32,7 +32,7 @@
         </div>
 
         <?php
-        include 'database.php';
+        require 'database.php';
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //bikes und date auf Gültigkeit validieren
             $bikes = get_cleaned_value($_POST["bikes"]);
