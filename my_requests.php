@@ -37,11 +37,7 @@
                         $current_month = idate('m');
                         $counter = 1;
                         foreach ($months as $month) {
-                            if ($counter == $current_month) {
-                                echo '<option value="' . $counter . '" selected>' . $month . '</option>';
-                            } else {
-                                echo '<option value="' . $counter . '">' . $month . '</option>';
-                            }
+                            echo '<option value="' . $counter . '"' . (($counter==$current_month)? " selected" : "") . '>' . $month . '</option>';
                             $counter += 1;
                         }
                         ?>
