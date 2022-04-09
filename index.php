@@ -42,12 +42,12 @@
             switch ($success) {
                 case BookingStatus::Success:
                     echo '<div class="jumbotron bg-success">';
-                    echo "<h4 class='text-center font-weight-normal'>Sie haben " . $bikes . " eBikes für den " . $date . " gebucht!</h4>";
+                    echo "<h4 class='text-center font-weight-normal'>Sie haben " . $bikes . " eBike". (($bikes>1)? "s" : "") . " für den " . date("d.m.Y", strtotime($date))  . " gebucht!</h4>";
                     echo '</div>';
                     break;
                 case BookingStatus::Duplicate:
                     echo '<div class="jumbotron bg-info">';
-                    echo "<h4 class='text-center font-weight-normal'>Sie haben bereits eine Buchung für den " . $date . " vorgenommen.
+                    echo "<h4 class='text-center font-weight-normal'>Sie haben bereits eine Buchung für den " . date("d.m.Y", strtotime($date)) . " vorgenommen.
                         Passen Sie die Buchung unter <em>Meine Buchungen</em> an</h4>";
                     echo '</div>';
                     break;
