@@ -37,7 +37,7 @@
                         $current_month = idate('m');
                         $counter = 1;
                         foreach ($months as $month) {
-                            echo '<option value="' . $counter . '"' . (($counter==$current_month)? " selected" : "") . '>' . $month . '</option>';
+                            echo '<option value="' . $counter . '"' . (($counter == $current_month) ? " selected" : "") . '>' . $month . '</option>';
                             $counter += 1;
                         }
                         ?>
@@ -66,7 +66,7 @@
                         $entry = getAllBookings($year, $month);
                         foreach ($entry as $en) {
                             echo '<tr>
-                                <td scope="row">' . $en[0] . '</td>
+                                <td scope="row">' . date("d.m.Y", strtotime($en[0]))  . '</td>
                                 <td>' . $en[1] . '</td>
                                 <td><a class="btn btn-primary" href="#">Bearbeiten</button></td>
                                 </tr>';
@@ -77,7 +77,7 @@
                         $entry = getAllBookings($year, $month);
                         foreach ($entry as $en) {
                             echo '<tr>
-                                <td scope="row">' . $en[0] . '</td>
+                                <td scope="row">' . date("d.m.Y", strtotime($en[0])) . '</td>
                                 <td>' . $en[1] . '</td>
                                 <td><a class="btn btn-primary" href="#">Bearbeiten</button></td>
                                 </tr>';
