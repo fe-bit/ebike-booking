@@ -1,7 +1,7 @@
 <?php
 echo '<nav class="navbar navbar-expand-md bg-dark navbar-dark">
 <!-- Brand -->
-<a class="navbar-brand" href="index.php">eBike Buchungsplattform</a>
+<a class="navbar-brand" href="index.php">Tourist eBike Buchungsplattform</a>
 
 <!-- Toggler/collapsibe Button -->
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
