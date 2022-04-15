@@ -24,20 +24,32 @@
                 <div class="form-group mr-2">
                     <label for="selectYear" class="mr-1">Jahr</label>
                     <select id="selectYear" class="form-control" name="year">
-                        <option selected>2022</option>
-                        <option>2023</option>
+                        <?php 
+                            if (isset($_GET['year'])){
+                                $year = htmlspecialchars($_GET["year"]);
+                            } else {
+                                $year = idate('Y');
+                            }
+                            echo '<option' . (($year == 2022) ? ' selected': ''). '>2022</option>';
+                            echo '<option' . (($year == 2023) ? ' selected': ''). '>2023</option>';
+                        ?>
+                        
                     </select>
-                </div>
-                <?php echo idate('m') == 1 ?>
+                </div>                
                 <div class="form-group">
                     <label for="selectMonth" class="mr-1">Monat</label>
                     <select id="selectMonth" class="form-control" name="month">
                         <?php
                         $months = array("Januar", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
-                        $current_month = idate('m');
+                        if (isset($_GET['month'])) {
+                            $selected_month = htmlspecialchars($_GET["month"]);
+                        } else {
+                            $selected_month = idate('m');
+                        }
+                        
                         $counter = 1;
                         foreach ($months as $month) {
-                            echo '<option value="' . $counter . '"' . (($counter == $current_month) ? " selected" : "") . '>' . $month . '</option>';
+                            echo '<option value="' . $counter . '"' . (($counter == $selected_month) ? " selected" : "") . '>' . $month . '</option>';
                             $counter += 1;
                         }
                         ?>
