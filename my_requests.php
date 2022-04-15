@@ -63,25 +63,17 @@
                     if (isset($_GET['year']) && isset($_GET['month'])) {
                         $year = htmlspecialchars($_GET["year"]);
                         $month = htmlspecialchars($_GET["month"]);
-                        $entry = getAllBookings($year, $month);
-                        foreach ($entry as $en) {
-                            echo '<tr>
-                                <td scope="row">' . date("d.m.Y", strtotime($en[0]))  . '</td>
-                                <td>' . $en[1] . '</td>
-                                <td><a class="btn btn-primary" href="#">Bearbeiten</button></td>
-                                </tr>';
-                        }
                     } else {
                         $year = idate('Y');
                         $month = idate('m');
-                        $entry = getAllBookings($year, $month);
-                        foreach ($entry as $en) {
-                            echo '<tr>
-                                <td scope="row">' . date("d.m.Y", strtotime($en[0])) . '</td>
-                                <td>' . $en[1] . '</td>
-                                <td><a class="btn btn-primary" href="#">Bearbeiten</button></td>
-                                </tr>';
-                        }
+                    }
+                    $entry = getAllBookings($year, $month);
+                    foreach ($entry as $en) {
+                        echo '<tr>
+                            <td scope="row">' . date("d.m.Y", strtotime($en[0]))  . '</td>
+                            <td>' . $en[1] . '</td>
+                            <td>' . ((DateTime::createFromFormat("Y-m-d", $en[0]) > new DateTime()) ? '<a class="btn btn-primary" href="#">Bearbeiten</a>' : '') . '</td>
+                            </tr>';
                     }
                     ?>
                 </tbody>
